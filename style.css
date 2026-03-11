@@ -1,0 +1,171 @@
+
+html {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    max-width: 500px;
+    margin: 16px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+/* STYLE FOR FORMS */
+
+#nutrition-label-form {
+    background-color: #fff;
+    border: 1px solid black;
+    width: calc(100% - 32px);
+    max-width: 450px;
+    margin-bottom: 64px;
+    padding: 15px;
+    color: black;
+    box-shadow: 5px 5px 0px #e0e0e0;
+}
+
+fieldset {
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 0;
+    padding: 10px 0;
+}
+
+legend {
+    font-weight: 900;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    padding: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+input[type="text"], input[type="number"], textarea, select {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-top: 4px;
+    border-radius: 0;
+}
+
+input:focus {
+    outline: 2px solid black;
+    border-color: black;
+}
+
+.bar-thick {
+    height: 10px;
+    background: black;
+    margin: 10px 0;
+}
+
+button[type="submit"], .save-button {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 15px;
+    font-weight: 900;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+hr {
+    border: 0;
+    border-top: 4px solid black;
+    margin: 15px 0;
+}
+
+/* STYLE FOR NUTRITION FACTS LABEL */
+
+.nutrition-label {
+    border: 1px solid black;
+    width: 300px;
+    padding: 8px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: white;
+    line-height: 1.2;
+}
+
+.label-header {
+    font-weight: 900;
+    font-size: 32px;
+    margin-bottom: 2px;
+}
+
+.serving-size-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.bar-thick { height: 8px; background: black; margin: 4px 0; }
+.bar-medium { height: 4px; background: black; margin: 4px 0; }
+.bar-small { height: 1px; background: black; margin: 4px 0; }
+
+.calories-header { font-weight: bold; }
+.calories-value {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.dv-header {
+    text-align: right;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+}
+
+.nutrient-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding: 2px 0;
+    font-size: 14px;
+}
+
+.indent { padding-left: 15px; }
+.double-indent { padding-left: 30px; }
+
+.vit-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 2px 0;
+    font-size: 13px;
+}
+
+.footnote {
+    font-size: 10px;
+    margin-top: 4px;
+}

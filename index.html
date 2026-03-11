@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+
+</head>
+<body>
+
+    <div class="container">
+
+    <div class="header">
+        <h1>Adit's Nutrition Facts Label Generator</h1>
+        <p>
+            A simple web tool to generate nutrition facts label, just enter the nutrition information in and it will
+            generate a nutrition facts label that you can download. Made By:
+            <a href="https://adit.madbyad.my.id">Aditya Wahyu Santoso</a>
+            <a href="https://madbyad.my.id">(MadByAd)</a>
+            &copy; 2026 <a href="https://madbyad.my.id">MadByAd</a>
+        </p>
+    </div>
+
+    <!-- NUTRITION FORMS -->
+    <form id="nutrition-label-form">
+        <!-- SERVING INFORMATION -->
+        <fieldset>
+            <legend>Serving Information</legend>
+            <label for="servingSize">Serving Size (e.g., 2/3 cup, 55g):</label>
+            <input type="text" id="servingSize" name="servingSize" placeholder="2/3 cup (55g)" required>
+
+            <label for="servingsPerContainer">Servings Per Container:</label>
+            <input type="number" id="servingsPerContainer" name="servingsPerContainer" placeholder="8" required>
+        </fieldset>
+        <!-- CALORIES -->
+        <fieldset>
+            <legend>Calories</legend>
+            <label for="calories">Calories per serving:</label>
+            <input type="number" id="calories" name="calories" placeholder="230" required>
+        </fieldset>
+        <!-- MACRONUTRIENTS -->
+        <fieldset>
+            <legend>Macronutrients</legend>
+
+            <label for="totalFat">Total Fat (g):</label>
+            <input type="number" step="0.1" id="totalFat" name="totalFat">
+
+            <label for="saturatedFat">Saturated Fat (g):</label>
+            <input type="number" step="0.1" id="saturatedFat" name="saturatedFat">
+
+            <label for="transFat">Trans Fat (g):</label>
+            <input type="number" step="0.1" id="transFat" name="transFat">
+
+            <hr>
+
+            <label for="cholesterol">Cholesterol (mg):</label>
+            <input type="number" id="cholesterol" name="cholesterol">
+
+            <label for="sodium">Sodium (mg):</label>
+            <input type="number" id="sodium" name="sodium">
+
+            <hr>
+
+            <label for="totalCarbs">Total Carbohydrates (g):</label>
+            <input type="number" step="0.1" id="totalCarbs" name="totalCarbs">
+
+            <label for="dietaryFiber">Dietary Fiber (g):</label>
+            <input type="number" step="0.1" id="dietaryFiber" name="dietaryFiber">
+
+            <label for="totalSugars">Total Sugars (g):</label>
+            <input type="number" step="0.1" id="totalSugars" name="totalSugars">
+
+            <label for="addedSugars">Includes Added Sugars (g):</label>
+            <input type="number" step="0.1" id="addedSugars" name="addedSugars">
+
+            <hr>
+
+            <label for="protein">Protein (g):</label>
+            <input type="number" step="0.1" id="protein" name="protein">
+        </fieldset>
+        <!-- VITAMINS & MINERALS -->
+        <fieldset>
+            <legend>Vitamins & Minerals</legend>
+            <p><small>Enter the amount (mcg/mg) or % Daily Value</small></p>
+
+            <label for="vitaminD">Vitamin D (mcg):</label>
+            <input type="number" step="0.1" id="vitaminD" name="vitaminD">
+
+            <label for="calcium">Calcium (mg):</label>
+            <input type="number" step="0.1" id="calcium" name="calcium">
+
+            <label for="iron">Iron (mg):</label>
+            <input type="number" step="0.1" id="iron" name="iron">
+
+            <label for="potassium">Potassium (mg):</label>
+            <input type="number" step="0.1" id="potassium" name="potassium">
+        </fieldset>
+
+        <div style="padding: 16px 0;">
+            <input type="checkbox" name="optional-vitamins" id="optional-vitamins" oninput="
+                if (!this.checked) {
+                    document.getElementById('optional-vitamins-input').style.display = 'none';
+                } else {
+                    document.getElementById('optional-vitamins-input').style.display = 'block';
+                }">
+            <label for="optional-vitamins" style="display: inline;">Optional Vitamins & Minerals</label>
+        </div>
+        <!-- OPTIONAL VITAMINS & MINERALS -->
+        <fieldset id="optional-vitamins-input" style="display: none;">
+            <legend>Optional Vitamins & Minerals</legend>
+
+            <label for="vitaminA">Vitamin A (mcg RAE):</label>
+            <input type="number" step="0.1" id="vitaminA" name="vitaminA">
+            <select name="vitaminASource">
+                <option value="">(None)</option>
+                <option value="as beta-carotene">as beta-carotene</option>
+            </select>
+
+            <label for="vitaminC">Vitamin C (mg):</label>
+            <input type="number" step="0.1" id="vitaminC" name="vitaminC">
+
+            <label for="vitaminE">Vitamin E (mg):</label>
+            <input type="number" step="0.1" id="vitaminE" name="vitaminE">
+
+            <label for="vitaminK">Vitamin K (mcg):</label>
+            <input type="number" step="0.1" id="vitaminK" name="vitaminK">
+
+            <hr>
+            <label for="thiamin">Thiamin (B1) (mg):</label>
+            <input type="number" step="0.01" id="thiamin" name="thiamin">
+
+            <label for="riboflavin">Riboflavin (B2) (mg):</label>
+            <input type="number" step="0.01" id="riboflavin" name="riboflavin">
+
+            <label for="niacin">Niacin (B3) (mg NE):</label>
+            <input type="number" step="0.1" id="niacin" name="niacin">
+
+            <label for="vitaminB6">Vitamin B6 (mg):</label>
+            <input type="number" step="0.01" id="vitaminB6" name="vitaminB6">
+
+            <label for="folate">Folate (mcg DFE):</label>
+            <input type="number" step="1" id="folate" name="folate">
+
+            <label for="vitaminB12">Vitamin B12 (mcg):</label>
+            <input type="number" step="0.01" id="vitaminB12" name="vitaminB12">
+
+            <label for="biotin">Biotin (mcg):</label>
+            <input type="number" step="0.1" id="biotin" name="biotin">
+
+            <label for="pantothenicAcid">Pantothenic Acid (B5) (mg):</label>
+            <input type="number" step="0.1" id="pantothenicAcid" name="pantothenicAcid">
+
+            <hr>
+            <label for="phosphorus">Phosphorus (mg):</label>
+            <input type="number" step="1" id="phosphorus" name="phosphorus">
+
+            <label for="iodine">Iodine (mcg):</label>
+            <input type="number" step="1" id="iodine" name="iodine">
+
+            <label for="magnesium">Magnesium (mg):</label>
+            <input type="number" step="1" id="magnesium" name="magnesium">
+
+            <label for="zinc">Zinc (mg):</label>
+            <input type="number" step="0.1" id="zinc" name="zinc">
+
+            <label for="selenium">Selenium (mcg):</label>
+            <input type="number" step="1" id="selenium" name="selenium">
+
+            <label for="copper">Copper (mg):</label>
+            <input type="number" step="0.01" id="copper" name="copper">
+
+            <label for="manganese">Manganese (mg):</label>
+            <input type="number" step="0.1" id="manganese" name="manganese">
+
+            <label for="chromium">Chromium (mcg):</label>
+            <input type="number" step="1" id="chromium" name="chromium">
+
+            <label for="molybdenum">Molybdenum (mcg):</label>
+            <input type="number" step="1" id="molybdenum" name="molybdenum">
+        </fieldset>
+
+        <button type="submit">Generate Label</button>
+    </form>
+
+    <!-- NUTRITION LABEL -->
+    <div id="export-wrapper">
+    <div class="nutrition-label">
+        <div class="label-header">Nutrition Facts</div>
+        <div class="servings-info">8 servings per container</div>
+        <div class="serving-size-row">
+            <span>Serving size</span>
+            <span>2/3 cup (55g)</span>
+        </div>
+        <div class="bar-thick"></div>
+        <div class="calories-header">
+            <span>Amount per serving</span>
+            <div class="calories-value">
+                <span>Calories</span>
+                <span>230</span>
+            </div>
+        </div>
+        <div class="bar-medium"></div>
+        <div class="dv-header">% Daily Value*</div>
+
+        <div class="nutrient-row">
+            <span><b>Total Fat</b> 8g</span>
+            <b>10%</b>
+        </div>
+        <div class="nutrient-row indent">
+            <span>Saturated Fat 1g</span>
+            <b>5%</b>
+        </div>
+        <div class="nutrient-row indent">
+            <span><i>Trans</i> Fat 0g</span>
+            <span></span>
+        </div>
+        <div class="nutrient-row">
+            <span><b>Cholesterol</b> 0mg</span>
+            <b>0%</b>
+        </div>
+        <div class="nutrient-row">
+            <span><b>Sodium</b> 160mg</span>
+            <b>7%</b>
+        </div>
+        <div class="nutrient-row">
+            <span><b>Total Carbohydrate</b> 37g</span>
+            <b>13%</b>
+        </div>
+        <div class="nutrient-row indent">
+            <span>Dietary Fiber 4g</span>
+            <b>14%</b>
+        </div>
+        <div class="nutrient-row indent">
+            <span>Total Sugars 12g</span>
+            <span></span>
+        </div>
+        <div class="nutrient-row double-indent">
+            <span>Includes 10g Added Sugars</span>
+            <b>20%</b>
+        </div>
+        <div class="nutrient-row">
+            <span><b>Protein</b> 3g</span>
+            <span></span>
+        </div>
+
+        <div class="bar-thick"></div>
+
+        <div class="vit-row"><span>Vitamin D 2mcg</span> <span>10%</span></div>
+        <div class="vit-row"><span>Calcium 260mg</span> <span>20%</span></div>
+        <div class="vit-row"><span>Iron 8mg</span> <span>45%</span></div>
+        <div class="vit-row"><span>Potassium 235mg</span> <span>6%</span></div>
+
+        <div class="bar-small"></div>
+        <div class="footnote">
+            * The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+        </div>
+    </div>
+    </div>
+
+    <div style="padding-bottom: 256px;">
+        <button class="save-button" onclick="exportLabel()">SAVE AS IMAGE</button>
+    </div>
+
+    <small>
+        Made By:
+        <a href="https://adit.madbyad.my.id">Aditya Wahyu Santoso</a>
+        <a href="https://madbyad.my.id">(MadByAd)</a>
+        &copy; 2026 <a href="https://madbyad.my.id">MadByAd</a>
+    </small>
+
+    </div>
+
+    <script>
+        function calculateNutritionJSON(formElement) {
+            const formData = new FormData(formElement);
+            const data = Object.fromEntries(formData.entries());
+
+            // Standard FDA Daily Values (DV) for a 2,000 calorie diet
+            const DV_LIMITS = {
+                totalFat: 78,
+                saturatedFat: 20,
+                cholesterol: 300,
+                sodium: 2300,
+                totalCarbs: 275,
+                dietaryFiber: 28,
+                addedSugars: 50,
+                vitaminD: 20,
+                calcium: 1300,
+                iron: 18,
+                potassium: 4700,
+
+                // optional vitamins & minerals
+                vitaminA: 900,
+                vitaminC: 90,
+                vitaminE: 15,
+                vitaminK: 120,
+                thiamin: 1.2,
+                riboflavin: 1.3,
+                niacin: 16,
+                vitaminB6: 1.7,
+                folate: 400,
+                vitaminB12: 2.4,
+                biotin: 30,
+                pantothenicAcid: 5,
+                phosphorus: 1250,
+                iodine: 150,
+                magnesium: 420,
+                zinc: 11,
+                selenium: 55,
+                copper: 0.9,
+                manganese: 2.3,
+                chromium: 35,
+                molybdenum: 45
+            };
+
+            const micronutrientKeys = [
+                { key: 'vitaminA', name: 'Vitamin A', unit: 'mcg', source: data.vitaminASource },
+                { key: 'vitaminC', name: 'Vitamin C', unit: 'mg' },
+                { key: 'vitaminE', name: 'Vitamin E', unit: 'mg' },
+                { key: 'vitaminK', name: 'Vitamin K', unit: 'mcg' },
+                { key: 'thiamin', name: 'Thiamin', unit: 'mg' },
+                { key: 'riboflavin', name: 'Riboflavin', unit: 'mg' },
+                { key: 'niacin', name: 'Niacin', unit: 'mg' },
+                { key: 'vitaminB6', name: 'Vitamin B6', unit: 'mg' },
+                { key: 'folate', name: 'Folate', unit: 'mcg' },
+                { key: 'vitaminB12', name: 'Vitamin B12', unit: 'mcg' },
+                { key: 'biotin', name: 'Biotin', unit: 'mcg' },
+                { key: 'pantothenicAcid', name: 'Pantothenic Acid', unit: 'mg' },
+                { key: 'phosphorus', name: 'Phosphorus', unit: 'mg' },
+                { key: 'iodine', name: 'Iodine', unit: 'mcg' },
+                { key: 'magnesium', name: 'Magnesium', unit: 'mg' },
+                { key: 'zinc', name: 'Zinc', unit: 'mg' },
+                { key: 'selenium', name: 'Selenium', unit: 'mcg' },
+                { key: 'copper', name: 'Copper', unit: 'mg' },
+                { key: 'manganese', name: 'Manganese', unit: 'mg' },
+                { key: 'chromium', name: 'Chromium', unit: 'mcg' },
+                { key: 'molybdenum', name: 'Molybdenum', unit: 'mcg' }
+            ];
+
+            function getDV(value, limit) {
+                if (!value || !limit) return 0;
+                return Math.round((parseFloat(value) / limit) * 100);
+            };
+
+            const nutritionJSON = {
+                header: {
+                    servingSize: data.servingSize,
+                    servingsPerContainer: data.servingsPerContainer
+                },
+                calories: parseInt(data.calories) || 0,
+                nutrients: {
+                    totalFat: {
+                        value: parseFloat(data.totalFat) || 0,
+                        unit: "g",
+                        dv: getDV(data.totalFat, DV_LIMITS.totalFat)
+                    },
+                    saturatedFat: {
+                        value: parseFloat(data.saturatedFat) || 0,
+                        unit: "g",
+                        dv: getDV(data.saturatedFat, DV_LIMITS.saturatedFat)
+                    },
+                    transFat: {
+                        value: parseFloat(data.transFat) || 0,
+                        unit: "g",
+                        dv: null
+                    },
+                    cholesterol: {
+                        value: parseInt(data.cholesterol) || 0,
+                        unit: "mg",
+                        dv: getDV(data.cholesterol, DV_LIMITS.cholesterol)
+                    },
+                    sodium: {
+                        value: parseInt(data.sodium) || 0,
+                        unit: "mg",
+                        dv: getDV(data.sodium, DV_LIMITS.sodium)
+                    },
+                    totalCarbs: {
+                        value: parseFloat(data.totalCarbs) || 0,
+                        unit: "g",
+                        dv: getDV(data.totalCarbs, DV_LIMITS.totalCarbs)
+                    },
+                    dietaryFiber: {
+                        value: parseFloat(data.dietaryFiber) || 0,
+                        unit: "g",
+                        dv: getDV(data.dietaryFiber, DV_LIMITS.dietaryFiber)
+                    },
+                    totalSugars: {
+                        value: parseFloat(data.totalSugars) || 0,
+                        unit: "g",
+                        dv: null
+                    },
+                    addedSugars: {
+                        value: parseFloat(data.addedSugars) || 0,
+                        unit: "g",
+                        dv: getDV(data.addedSugars, DV_LIMITS.addedSugars)
+                    },
+                    protein: {
+                        value: parseFloat(data.protein) || 0,
+                        unit: "g",
+                        dv: null
+                    },
+                    vitamins: [
+                        {name: "Vitamin D", value: data.vitaminD || 0, unit: "mcg", dv: getDV(data.vitaminD, DV_LIMITS.vitaminD)},
+                        {name: "Calcium", value: data.calcium || 0, unit: "mg", dv: getDV(data.calcium, DV_LIMITS.calcium)},
+                        {name: "Iron", value: data.iron || 0, unit: "mg", dv: getDV(data.iron, DV_LIMITS.iron)},
+                        {name: "Potassium", value: data.potassium || 0, unit: "mg", dv: getDV(data.potassium, DV_LIMITS.potassium)},
+
+                        // optional vitamins & minerals
+                        ...micronutrientKeys
+                            .filter(m => data[m.key] > 0)
+                            .map(m => ({
+                                name: m.name,
+                                value: data[m.key],
+                                unit: m.unit,
+                                dv: getDV(data[m.key], DV_LIMITS[m.key]),
+                                source: m.source || null
+                            }))
+                    ].filter(v => v.value > 0 || ["Vitamin D", "Calcium", "Iron", "Potassium"].includes(v.name))
+                }
+            };
+            return nutritionJSON;
+        };
+
+        function updateLabel(data) {
+
+            const container = document.querySelector('.nutrition-label');
+
+            function getRow(label, value, unit, dv, isIndent = false) {
+                const indentClass = isIndent ? 'indent' : '';
+                const boldLabel = isIndent ? label : `<b>${label}</b>`;
+                const dvDisplay = dv !== null ? `<b>${dv}%</b>` : '';
+
+                return `
+                    <div class="nutrient-row ${indentClass}">
+                        <span>${boldLabel} ${value}${unit}</span>
+                        ${dvDisplay}
+                    </div>`;
+            };
+
+            const vitaminRows = data.nutrients.vitamins.map(v => `
+                <div class="vit-row">
+                    <span>${v.name} ${v.value}${v.unit} ${v.source ? '('+v.source+')' : ''}</span>
+                    <span>${v.dv}%</span>
+                </div>
+            `).join('');
+
+            const labelHtml = `
+                <div class="label-header">Nutrition Facts</div>
+                <div class="servings-info">${data.header.servingsPerContainer} servings per container</div>
+                <div class="serving-size-row">
+                    <span>Serving size</span>
+                    <span>${data.header.servingSize}</span>
+                </div>
+                <div class="bar-thick"></div>
+                <div class="calories-header">
+                    <span>Amount per serving</span>
+                    <div class="calories-value">
+                        <span>Calories</span>
+                        <span>${data.calories}</span>
+                    </div>
+                </div>
+                <div class="bar-medium"></div>
+                <div class="dv-header">% Daily Value*</div>
+
+                ${getRow("Total Fat", data.nutrients.totalFat.value, "g", data.nutrients.totalFat.dv)}
+                ${getRow("Saturated Fat", data.nutrients.saturatedFat.value, "g", data.nutrients.saturatedFat.dv, true)}
+                ${getRow("<i>Trans</i> Fat", data.nutrients.transFat.value, "g", null, true)}
+
+                ${getRow("Cholesterol", data.nutrients.cholesterol.value, "mg", data.nutrients.cholesterol.dv)}
+                ${getRow("Sodium", data.nutrients.sodium.value, "mg", data.nutrients.sodium.dv)}
+
+                ${getRow("Total Carbohydrate", data.nutrients.totalCarbs.value, "g", data.nutrients.totalCarbs.dv)}
+                ${getRow("Dietary Fiber", data.nutrients.dietaryFiber.value, "g", data.nutrients.dietaryFiber.dv, true)}
+                ${getRow("Total Sugars", data.nutrients.totalSugars.value, "g", null, true)}
+
+                <div class="nutrient-row double-indent">
+                    <span>Includes ${data.nutrients.addedSugars.value}g Added Sugars</span>
+                    <b>${data.nutrients.addedSugars.dv}%</b>
+                </div>
+
+                ${getRow("Protein", data.nutrients.protein.value, "g", null)}
+
+                <div class="bar-thick"></div>
+
+                ${vitaminRows}
+
+                <div class="bar-small"></div>
+                <div class="footnote">
+                    * The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+                </div>
+            `;
+
+            container.innerHTML = labelHtml;
+        }
+
+        document.getElementById('nutrition-label-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            updateLabel(calculateNutritionJSON(e.target));
+        });
+
+        async function exportLabel() {
+            const node = document.getElementById('export-wrapper');
+
+            try {
+                const dataUrl = await htmlToImage.toPng(node, {
+                    quality: 1,
+                    pixelRatio: 1.0,
+                    skipFonts: false,
+                });
+
+                const link = document.createElement('a');
+                link.download = `nutrition-facts.png`;
+                link.href = dataUrl;
+                link.click();
+            } catch (error) {
+                console.error('Oops, something went wrong!', error);
+            }
+        }
+    </script>
+
+</body>
+</html>
